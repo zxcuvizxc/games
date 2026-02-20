@@ -1,0 +1,970 @@
+/* Основные стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.screen {
+  display: none;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Заголовки */
+.title-container {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  letter-spacing: 3px;
+}
+
+h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  color: #ff00ff;
+  margin-bottom: 20px;
+}
+
+.pixel-text {
+  background: linear-gradient(45deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.glitch {
+  position: relative;
+  color: #fff;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00ff;
+  animation: glitch-1 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: 1px 0 #00ffff;
+  animation: glitch-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-1 {
+  0% { clip-path: inset(40% 0 61% 0); }
+  100% { clip-path: inset(92% 0 1% 0); }
+}
+
+@keyframes glitch-2 {
+  0% { clip-path: inset(25% 0 58% 0); }
+  100% { clip-path: inset(80% 0 5% 0); }
+}
+
+/* Теги жанров */
+.genre-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tag {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.platformer {
+  background: linear-gradient(45deg, #ff6b6b, #ffa500);
+  color: white;
+}
+
+.detective {
+  background: linear-gradient(45deg, #4ecdc4, #44a08d);
+  color: white;
+}
+
+.shooter {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: white;
+}
+
+.puzzle {
+  background: linear-gradient(45deg, #834d9b, #d04ed6);
+  color: white;
+}
+
+.rpg {
+  background: linear-gradient(45deg, #00b09b, #96c93d);
+  color: white;
+}
+
+/* История и элементы игры */
+.story {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 30px 0;
+  border-left: 5px solid #00ffff;
+  line-height: 1.6;
+}
+
+.story p {
+  margin-bottom: 10px;
+}
+
+.time-warning {
+  color: #ff5555;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.controls {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding: 8px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  background: #333;
+  border-radius: 5px;
+  margin: 0 5px;
+  font-weight: bold;
+  border: 2px solid #555;
+}
+.key_2{
+  display: inline-flex;
+  position: initial !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  background: #333;
+  border-radius: 5px;
+  margin: 0 5px;
+  font-weight: bold;
+  border: 2px solid #555;
+}
+
+.hint {
+  background: rgba(255, 215, 0, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 1px solid gold;
+}
+
+/* Кнопки */
+.btn {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.4);
+  background: linear-gradient(45deg, #00ccff, #0066ff);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.pulse {
+  animation: pulse-btn 2s infinite;
+}
+
+@keyframes pulse-btn {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(0, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+}
+
+/* Игровой экран */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  color: #ff5555;
+}
+
+.timer-container i {
+  margin-right: 10px;
+  color: #ff5555;
+}
+
+.room-info {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00ffff;
+  background: rgba(0, 255, 255, 0.1);
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+.progress {
+  min-width: 200px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff00, #00cc00);
+  width: 0%;
+  transition: width 0.5s;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Комнаты */
+.room {
+  display: none;
+}
+
+.room.active {
+  display: block;
+}
+
+.room-title {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 5px solid;
+}
+
+#room1 .room-title { border-left-color: #ff6b6b; }
+#room2 .room-title { border-left-color: #4ecdc4; }
+#room3 .room-title { border-left-color: #ff416c; }
+
+.room-title h3 {
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.room-title p {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Область игры */
+.game-area {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  min-height: content-box;
+}
+
+
+
+/* Комната 1: Платформер */
+.platformer-container {
+  display: flex;
+  gap: 20px;
+  height: 350px;
+}
+
+.platformer-game {
+  flex: 2;
+  background: rgba(20, 20, 40, 0.8);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #ff6b6b;
+}
+
+.player {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  border-radius: 50%;
+  bottom: 30px;
+  left: 20px;
+  transition: left 0.1s, bottom 0.2s;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.platform {
+  position: absolute;
+  background: linear-gradient(45deg, #8a2be2, #4b0082);
+  border-radius: 5px;
+  height: 20px;
+}
+
+.key {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: gold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.key1 { top: 50px; left: 150px; }
+.key2 { top: 100px; left: 280px; }
+.key3 { top: 30px; left: 400px; }
+
+.switch {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #333;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff00;
+  font-size: 1.5rem;
+  cursor: pointer;
+  bottom: 100px;
+  left: 200px;
+  border: 2px solid #555;
+}
+
+#switch2 {
+  left: 350px;
+  bottom: 120px;
+}
+
+.door {
+  position: absolute;
+  width: 50px;
+  height: 80px;
+  background: linear-gradient(45deg, #8b4513, #a0522d);
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+
+.puzzle-sidebar {
+  flex: 1;
+  background: rgba(30, 30, 60, 0.8);
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #8a2be2;
+}
+
+.sequence-display {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.sequence-slot {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px dashed #00ffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.collected-keys {
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+#collected-keys-list {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.hint-box {
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 5px;
+  border: 1px solid gold;
+  font-size: 0.9rem;
+}
+
+/* Комната 2: Детектив */
+.detective-container {
+  display: flex;
+  gap: 20px;
+  min-height: content-box;
+}
+
+.scene {
+  flex: 2;
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid #4ecdc4;
+  position: relative;
+}
+
+.characters {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.character {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.character:hover {
+  transform: translateY(-10px);
+  background: rgba(78, 205, 196, 0.2);
+}
+
+.char-icon {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 10px;
+}
+
+.clues {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.clue {
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.clue:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.safe {
+
+  bottom: 20px;
+  left: 50%;
+
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  text-align: center;
+  border: 2px solid gold;
+}
+
+.safe-display {
+  background: #111;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+}
+
+.safe-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.safe-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.safe-btn {
+  width: 50px;
+  height: 50px;
+  background: #333;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.safe-btn:hover {
+  background: #444;
+  transform: scale(1.05);
+}
+
+.safe-btn.clear {
+  width: 100%;
+  background: #ff5555;
+  margin-top: 10px;
+}
+
+.detective-sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dialogue-box {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #4ecdc4;
+}
+
+#dialogue-text {
+  min-height: 100px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.inventory {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #8a2be2;
+}
+
+#inventory-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.notes {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ffa500;
+  font-size: 0.9rem;
+}
+
+/* Комната 3: Шутер */
+.shooter-container {
+  display: flex;
+  column-count: 3;
+  gap: 20px;
+  min-height: content-box;
+}
+
+.shooter-game {
+  flex: 2;
+  background: rgba(20, 0, 20, 0.8);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #ff416c;
+  min-height: content-box;
+}
+
+.enemy {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  z-index: 5;
+}
+
+.enemy:hover {
+  transform: scale(1.1);
+}
+
+.enemy.red { background: linear-gradient(45deg, #ff0000, #cc0000); top: 50px; left: 100px; }
+.enemy.blue { background: linear-gradient(45deg, #0000ff, #0000cc); top: 120px; left: 250px; }
+.enemy.green { background: linear-gradient(45deg, #00ff00, #00cc00); top: 80px; left: 400px; }
+.enemy.yellow { background: linear-gradient(45deg, #ff0000, #cc0000); top: 180px; left: 150px; }
+
+.exit-door {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(45deg, #00ff00, #00cc00);
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.crosshair {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  color: #ff5555;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 30px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.shooter-sidebar {
+  flex: 1;
+  background: rgba(40, 0, 0, 0.8);
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #ff416c;
+  min-height: content-box;
+}
+
+.target-sequence {
+  margin: 20px 0;
+}
+
+.sequence-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.sequence-item.active {
+  background: rgba(255, 255, 0, 0.2);
+  border-left: 5px solid yellow;
+}
+
+.enemy-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.current-target {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(255, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+#current-target {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #ff5555;
+}
+
+.target-log {
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  max-height: content-box;
+  overflow-y: auto;
+}
+
+.ammo {
+  margin-top: 20px;
+}
+
+.ammo-bar {
+  width: 100%;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.ammo-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff00, #ffcc00);
+  width: 100%;
+  transition: width 0.3s;
+}
+
+/* Футер игры */
+.game-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #555;
+  flex-wrap: wrap;
+}
+
+.controls-reminder {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* Финальный экран */
+.results {
+  display: flex;
+  gap: 30px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.result-card, .achievements {
+  flex: 1;
+  min-width: 300px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 25px;
+  border-radius: 15px;
+  border: 2px solid #00ffff;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  margin: 10px 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+}
+
+.achievement.achieved {
+  background: rgba(0, 255, 0, 0.1);
+  border-left: 5px solid #00ff00;
+}
+
+.story-end {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 25px;
+  border-radius: 10px;
+  margin: 30px 0;
+  line-height: 1.6;
+  border: 1px solid #ff00ff;
+}
+
+.story-end p {
+  margin-bottom: 15px;
+}
+
+.credits {
+  text-align: center;
+  margin-top: 40px;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .platformer-container, .detective-container, .shooter-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .genre-tags {
+    gap: 5px;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
+  .characters {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .game-footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

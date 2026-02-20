@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хроно-Портфель: Смешение Жанров</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&family=Roboto+Mono:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="img/favicon.ico">
+</head>
+<body>
+<div class="container">
+  <!-- Стартовый экран -->
+  <div id="start-screen" class="screen active">
+    <div class="title-container">
+      <h1><span class="pixel-text">ХРОНО-ПОРТФЕЛЬ</span></h1>
+      <h2><span class="glitch" data-text="СМЕШЕНИЕ ЖАНРОВ">СМЕШЕНИЕ ЖАНРОВ</span></h2>
+      <div class="genre-tags">
+        <span class="tag platformer">ПЛАТФОРМЕР</span>
+        <span class="tag detective">ДЕТЕКТИВ</span>
+        <span class="tag shooter">ШУТЕР</span>
+        <span class="tag puzzle">ГОЛОВОЛОМКА</span>
+        <span class="tag rpg">RPG</span>
+      </div>
+    </div>
+
+    <div class="story">
+      <p><i class="fas fa-exclamation-triangle"></i> ВНИМАНИЕ! Портал реальностей поврежден.</p>
+      <p>Вы - студент, застрявший между измерениями. Чтобы вернуться домой, пройдите 3 комнаты, каждая - смешение
+        жанров.</p>
+      <p>У вас есть <span class="time-warning">5 минут</span> до коллапса портала!</p>
+    </div>
+
+    <div class="controls">
+      <h3><i class="fas fa-gamepad"></i> Управление:</h3>
+      <div class="control-item">
+        <span class="key_2">A/D</span> или <span class="key_2"><i class="fas fa-arrow-left"></i>/<i
+        class="fas fa-arrow-right"></i></span> - Движение
+      </div>
+      <div class="control-item">
+        <span class="key_2">W</span> или <span class="key_2"><i class="fas fa-arrow-up"></i></span> -
+        Прыжок/Взаимодействие
+      </div>
+      <div class="control-item">
+        <span class="key_2">ПРОБЕЛ</span> или <span class="key_2"><i class="fas fa-mouse-pointer"></i></span> -
+        Стрельба/Выбор
+      </div>
+    </div>
+
+    <button id="start-btn" class="btn pulse">
+      <i class="fas fa-play"></i> НАЧАТЬ ИГРУ (5:00)
+    </button>
+
+    <div class="hint">
+      <p><i class="fas fa-lightbulb"></i> Каждая комната смешивает 2-3 игровых жанра. Будьте готовы к смене механик!</p>
+    </div>
+  </div>
+
+  <!-- Игровой экран -->
+  <div id="game-screen" class="screen">
+    <div class="game-header">
+      <div class="timer-container">
+        <i class="fas fa-clock"></i>
+        <span id="timer">05:00</span>
+      </div>
+      <div class="room-info">
+        Комната <span id="room-name">ПЛАТФОРМЕР+ГОЛОВОЛОМКА</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-text">Прогресс: <span id="progress-text">0%</span></div>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <!-- Комната 1: Платформер с головоломкой -->
+      <div id="room1" class="room active">
+        <div class="room-title">
+          <h3><i class="fas fa-running"></i> Прыжки и Логика</h3>
+          <p>Соберите ключи в правильном порядке, используя платформы и переключатели</p>
+        </div>
+
+        <div class="game-area">
+          <div class="platformer-container">
+            <div class="platformer-game" id="platformer-game">
+              <!-- Персонаж -->
+              <div id="player" class="player"></div>
+
+              <!-- Платформы -->
+              <div class="platform" style="left: 0; bottom: 30px; width: 100px;"></div>
+              <div class="platform" style="left: 120px; bottom: 80px; width: 80px;"></div>
+              <div class="platform" style="left: 220px; bottom: 50px; width: 70px;"></div>
+              <div class="platform" style="left: 320px; bottom: 100px; width: 90px;"></div>
+              <div class="platform" style="left: 430px; bottom: 60px; width: 100px;"></div>
+
+              <!-- Ключи -->
+              <div class="key key1" data-order="2"><i class="fas fa-key"></i></div>
+              <div class="key key2" data-order="3"><i class="fas fa-key"></i></div>
+              <div class="key key3" data-order="1"><i class="fas fa-key"></i></div>
+
+              <!-- Переключатели -->
+              <div class="switch" id="switch1"><i class="fas fa-toggle-on"></i></div>
+              <div class="switch" id="switch2"><i class="fas fa-toggle-off"></i></div>
+
+              <!-- Дверь -->
+              <div class="door"><i class="fas fa-door-closed"></i></div>
+            </div>
+
+            <div class="puzzle-sidebar">
+              <h4><i class="fas fa-puzzle-piece"></i> Головоломка Порядка</h4>
+              <p>Соберите ключи в правильной последовательности:</p>
+              <div class="sequence-display">
+                <div class="sequence-slot" id="slot1">?</div>
+                <div class="sequence-slot" id="slot2">?</div>
+                <div class="sequence-slot" id="slot3">?</div>
+              </div>
+              <div class="collected-keys">
+                <h5>Собранные ключи:</h5>
+                <div id="collected-keys-list"></div>
+              </div>
+              <div class="hint-box">
+                <p><i class="fas fa-lightbulb"></i> Подсказка: Активируйте переключатели, чтобы открыть доступ к ключам
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Комната 2: Детектив с RPG -->
+      <div id="room2" class="room">
+        <div class="room-title">
+          <h3><i class="fas fa-search"></i> Детектив и Диалоги</h3>
+          <p>Допросите персонажей, соберите улики и найдите код от сейфа</p>
+        </div>
+
+        <div class="game-area">
+          <div class="detective-container">
+            <div class="scene">
+
+              <div class="characters">
+                <div class="character" data-character="butler" data-clue="Перчатки">
+                  <div class="char-icon"><i class="fas fa-user-tie"></i></div>
+                  <div class="char-name">Дворецкий</div>
+                </div>
+                <div class="character" data-character="professor" data-clue="Очки">
+                  <div class="char-icon"><i class="fas fa-user-graduate"></i></div>
+                  <div class="char-name">Профессор</div>
+                </div>
+                <div class="character" data-character="artist" data-clue="Кисть">
+                  <div class="char-icon"><i class="fas fa-palette"></i></div>
+                  <div class="char-name">Художник</div>
+                </div>
+              </div>
+
+              <div class="clues">
+                <div class="clue" data-clue="Перчатки">Перчатки <i class="fas fa-hand-paper"></i></div>
+                <div class="clue" data-clue="Очки">Очки <i class="fas fa-glasses"></i></div>
+                <div class="clue" data-clue="Кисть">Кисть <i class="fas fa-paint-brush"></i></div>
+                <div class="clue" data-clue="Часы">Часы <i class="fas fa-clock"></i></div>
+              </div>
+
+
+            </div>
+            <div class="safe">
+              <div class="safe-display" id="safe-display">Введите код: _ _ _</div>
+              <div class="safe-buttons">
+                <div class="safe-row">
+                  <button class="safe-btn" data-number="1">1</button>
+                  <button class="safe-btn" data-number="2">2</button>
+                  <button class="safe-btn" data-number="3">3</button>
+                </div>
+                <div class="safe-row">
+                  <button class="safe-btn" data-number="4">4</button>
+                  <button class="safe-btn" data-number="5">5</button>
+                  <button class="safe-btn" data-number="6">6</button>
+                </div>
+                <div class="safe-row">
+                  <button class="safe-btn" data-number="7">7</button>
+                  <button class="safe-btn" data-number="8">8</button>
+                  <button class="safe-btn" data-number="9">9</button>
+                </div>
+                <button class="safe-btn clear" id="clear-code">Сброс</button>
+              </div>
+            </div>
+            <div class="detective-sidebar">
+              <div class="dialogue-box">
+                <h4><i class="fas fa-comments"></i> Диалог</h4>
+                <div id="dialogue-text">Выберите персонажа для допроса...</div>
+              </div>
+
+              <div class="inventory">
+                <h4><i class="fas fa-briefcase"></i> Собранные улики</h4>
+                <div id="inventory-items"></div>
+              </div>
+
+              <div class="notes">
+                <h4><i class="fas fa-sticky-note"></i> Заметки</h4>
+                <p>Код сейфа состоит из 3 цифр. Каждый персонаж знает одну цифру.</p>
+                <p>Соберите все улики, чтобы получить правильную последовательность.</p>
+                <div id="code-hints"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Комната 3: Шутер с пазлом -->
+      <div id="room3" class="room">
+        <div class="room-title">
+          <h3><i class="fas fa-crosshairs"></i> Стрельба и Паттерны</h3>
+          <p>Уничтожьте врагов в правильной последовательности, чтобы открыть выход</p>
+        </div>
+
+        <div class="game-area">
+          <div class="shooter-container">
+            <div class="shooter-game" id="shooter-game">
+              <!-- Враги -->
+              <div class="enemy red" data-type="1" data-order="3"><i class="fas fa-robot"></i></div>
+              <div class="enemy blue" data-type="2" data-order="1"><i class="fas fa-ghost"></i></div>
+              <div class="enemy green" data-type="3" data-order="2"><i class="fas fa-dragon"></i></div>
+              <div class="enemy yellow" data-type="1" data-order="2"><i class="fas fa-robot"></i></div>
+              <div class="enemy red" data-type="3" data-order="1"><i class="fas fa-dragon"></i></div>
+              <div class="enemy blue" data-type="2" data-order="3"><i class="fas fa-ghost"></i></div>
+
+              <!-- Прицел -->
+              <div id="crosshair" class="crosshair">+</div>
+
+              <!-- Выход -->
+              <div class="exit-door"><i class="fas fa-door-open"></i></div>
+            </div>
+
+            <div class="shooter-sidebar">
+              <h4><i class="fas fa-bullseye"></i> Целевая последовательность</h4>
+              <p>Уничтожайте врагов в порядке, указанном ниже:</p>
+
+              <div class="target-sequence">
+                <div class="sequence-item" id="target1">
+                  <span class="seq-num">1.</span>
+                  <div class="enemy-preview blue"><i class="fas fa-ghost"></i></div>
+                  <span>Синий призрак</span>
+                </div>
+                <div class="sequence-item" id="target2">
+                  <span class="seq-num">2.</span>
+                  <div class="enemy-preview green"><i class="fas fa-dragon"></i></div>
+                  <span>Зеленый дракон</span>
+                </div>
+                <div class="sequence-item" id="target3">
+                  <span class="seq-num">3.</span>
+                  <div class="enemy-preview red"><i class="fas fa-robot"></i></div>
+                  <span>Красный робот</span>
+                </div>
+              </div>
+
+              <div class="current-target">
+                <h5>Текущая цель:</h5>
+                <div id="current-target">Синий призрак <i class="fas fa-ghost"></i></div>
+              </div>
+
+
+            </div>
+            <div>
+              <div class="target-log">
+                <h5>Уничтожено:</h5>
+                <div id="destroyed-enemies"></div>
+              </div>
+
+              <div class="ammo">
+                <h5>Патроны: <span id="ammo-count">18</span></h5>
+                <div class="ammo-bar">
+                  <div class="ammo-fill" id="ammo-fill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="game-footer">
+      <button id="next-room-btn" class="btn">
+        <i class="fas fa-forward"></i> Следующая комната
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Финальный экран -->
+  <div id="end-screen" class="screen">
+    <div class="title-container">
+      <h1><span class="pixel-text">ПОРТАЛ ВОССТАНОВЛЕН</span></h1>
+      <h2><span class="glitch" data-text="ЖАНРЫ РАЗДЕЛЕНЫ">ЖАНРЫ РАЗДЕЛЕНЫ</span></h2>
+    </div>
+
+    <div class="results">
+      <div class="result-card">
+        <h3><i class="fas fa-trophy"></i> РЕЗУЛЬТАТЫ</h3>
+        <div class="result-item">
+          <span>Время:</span>
+          <span id="final-time">05:00</span>
+        </div>
+        <div class="result-item">
+          <span>Комнат пройдено:</span>
+          <span id="rooms-completed">3/3</span>
+        </div>
+
+      </div>
+
+      <div class="achievements">
+        <h3><i class="fas fa-medal"></i> ДОСТИЖЕНИЯ</h3>
+        <div class="achievement achieved">
+          <i class="fas fa-check-circle"></i>
+          <span>Платформер + Головоломка</span>
+        </div>
+        <div class="achievement achieved">
+          <i class="fas fa-check-circle"></i>
+          <span>Детектив + RPG</span>
+        </div>
+        <div class="achievement achieved">
+          <i class="fas fa-check-circle"></i>
+          <span>Шутер + Пазл</span>
+        </div>
+        <div class="achievement">
+          <i class="fas fa-crown"></i>
+          <span>Мастер смешения жанров</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-end">
+      <p>Поздравляем! Вы успешно прошли через все комнаты смешанных реальностей.</p>
+      <p>Портал стабилизирован, и вы возвращаетесь в свой мир... с новым пониманием игровых механик!</p>
+      <p><strong>Идея игры:</strong> Демонстрация того, как разные игровые жанры могут сочетаться в одном игровом опыте,
+        создавая уникальные механики.</p>
+    </div>
+
+    <button id="restart-btn" class="btn pulse">
+      <i class="fas fa-redo"></i> ИГРАТЬ СНОВА
+    </button>
+
+
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
